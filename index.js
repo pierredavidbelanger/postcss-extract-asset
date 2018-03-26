@@ -29,11 +29,13 @@ function Walker() {
             const param = value.nodes[0];
             if (param && param.type === 'string' && param.value) {
                 const uri = new URI(param.value);
-                const fromPath = path.normalize(path.join(path.dirname(decl.source.input.file), uri.pathname()));
-                const toPath = getToPath(fromPath);
-                const newUri = uri.clone().pathname(toPath);
-                // console.log('replace', decl.value, uri.href(), newUri.href());
-                decl.value = decl.value.replace(uri.href(), newUri.href());
+                if (!uri.protocol() || uri.protocol() === 'file') {
+                    const fromPath = path.normalize(path.join(path.dirname(decl.source.input.file), uri.pathname()));
+                    const toPath = getToPath(fromPath);
+                    const newUri = uri.clone().pathname(toPath);
+                    // console.log('replace', decl.value, uri.href(), newUri.href());
+                    decl.value = decl.value.replace(uri.href(), newUri.href());
+                }
             }
         }
     };
