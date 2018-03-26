@@ -1,6 +1,6 @@
 {
   "name": "postcss-extract-asset",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "PostCSS plugin to copy assets referenced by url()s into a destination directory.",
   "keywords": [
     "postcss",
